@@ -2,7 +2,7 @@ import sys, random, time
 import mysql.connector
 
 mydb = mysql.connector.connect(
-  host="107.20.30.117",
+  host="localhost",
   user="lucas",
   password="urubu100",
   database="generator"
