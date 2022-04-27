@@ -11,32 +11,37 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 def insert(values):
-  sql = "INSERT INTO algas (cidade, produto, pagamento, dia, valor, tempo, memoria) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+  sql = "INSERT INTO algas (cidade, produto, pagamento, dia, mes, quantidade, valor, total, tempo, memoria) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
   mycursor.execute(sql, values)
 
   mydb.commit()
-  print(mycursor.rowcount, "record inserted.")
 
-cidades = ['Sao Paulo', 'Rio de Janeiro', 'Florianopolis', 'Curitiba', 'Alagoas', 'Natal']
-produtos = ['Batata', 'Acucar', 'Feijao', 'CocaCola', 'Arroz']
+cidades = ['Sao Paulo', 'Rio de Janeiro', 'Salvador', 'Curitiba', 'Alagoas', 'Natal', 'Angra dos Reis']
+produtos = ['Frango', 'Sorvete', 'Feijao', 'Whisky', 'Arroz', 'Doritos', 'Ruffles', 'Chocolate']
+valores = [10.99, 16.85, 6.80, 89.99, 7.8, 7.9, 5.67, 8.5]
 pagamento = ['Dinheiro', 'Debito', 'Credito']
 semana = ['Domingo', 'Segunda', 'Terca', 'Quarta', 'Quinta', 'Sexta', 'Sabado']
+meses = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
 def transaction(range):
     tempo_inicial = (time.time())
     lista = []
     for item in range:
         cidade = cidades[random.randrange(0, (len(cidades)-1), 1)]
-        produto = produtos[random.randrange(0, (len(produtos)-1), 1)]
+        posicaoProdutoValor = random.randrange(0, (len(produtos)-1), 1)
+        produto = produtos[posicaoProdutoValor]
+        valor = valores[posicaoProdutoValor]
         formaPagamento = pagamento[random.randrange(0, (len(pagamento)-1), 1)]
         dia = semana[random.randrange(0, (len(semana)-1), 1)]
+        mes = meses[random.randrange(0, (len(semana)-1), 1)]
         quantidade = random.randint(1, 1000)
+        totalCompra = (quantidade * valor)
         tempo_append = (time.time())
         tempo_final = (tempo_append - tempo_inicial)
         lista.append(item)
         tamanho = sys.getsizeof(lista)
-        values = (cidade, produto, formaPagamento, dia, quantidade, tempo_final, tamanho)
+        values = (cidade, produto, formaPagamento, dia, mes, quantidade, valor, totalCompra, tempo_final, tamanho)
         print(values)
         insert(values)
 
