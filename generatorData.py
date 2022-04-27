@@ -2,7 +2,7 @@ import sys, random, time
 import mysql.connector
 
 mydb = mysql.connector.connect(
-  host="localhost",
+  host="107.20.30.117",
   user="lucas",
   password="urubu100",
   database="generator"
@@ -20,7 +20,7 @@ def insert(values):
 cidades = ['Sao Paulo', 'Rio de Janeiro', 'Salvador', 'Curitiba', 'Alagoas', 'Natal', 'Angra dos Reis']
 produtos = ['Frango', 'Sorvete', 'Feijao', 'Whisky', 'Arroz', 'Doritos', 'Ruffles', 'Chocolate']
 valores = [10.99, 16.85, 6.80, 89.99, 7.8, 7.9, 5.67, 8.5]
-pagamento = ['Dinheiro', 'Debito', 'Credito']
+pagamento = ['Debito', 'Credito', 'Dinheiro']
 semana = ['Domingo', 'Segunda', 'Terca', 'Quarta', 'Quinta', 'Sexta', 'Sabado']
 meses = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
@@ -28,13 +28,13 @@ def transaction(range):
     tempo_inicial = (time.time())
     lista = []
     for item in range:
-        cidade = cidades[random.randrange(0, (len(cidades)-1), 1)]
-        posicaoProdutoValor = random.randrange(0, (len(produtos)-1), 1)
+        cidade = cidades[random.randrange(0, (len(cidades)), 1)]
+        posicaoProdutoValor = random.randrange(0, (len(produtos)), 1)
         produto = produtos[posicaoProdutoValor]
         valor = valores[posicaoProdutoValor]
-        formaPagamento = pagamento[random.randrange(0, (len(pagamento)-1), 1)]
-        dia = semana[random.randrange(0, (len(semana)-1), 1)]
-        mes = meses[random.randrange(0, (len(semana)-1), 1)]
+        formaPagamento = pagamento[random.randrange(0, (len(pagamento)), 1)]
+        dia = semana[random.randrange(0, (len(semana)), 1)]
+        mes = meses[random.randrange(0, (len(semana)), 1)]
         quantidade = random.randint(1, 1000)
         totalCompra = (quantidade * valor)
         tempo_append = (time.time())
